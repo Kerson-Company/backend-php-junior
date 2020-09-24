@@ -1,5 +1,5 @@
 # backend-php-junior
-Teste programador Backend PHP Júnior (Laravel)
+Teste programador Backend PHP Júnior/Estágio (Laravel)
 
 ## Desafio Programador PHP Backend Júnior(Laravel)
 As tarefas de CRUD são rotinas muito comuns no dia a dia de desenvolvedores web, o objetivo principal do desafio é fazer um CRUD de Usuários. Somente a rota API é importante, não se preocupe com o frontend. 
@@ -8,11 +8,11 @@ Testes uniários com PHPUnit são um plus.
 Espera-se que o candidato tenha bons conhecimentos em PHP e saiba o mínimo do framework Laravel. 
 Para persistencia dos dados deve ser utilizado algum banco de dados relacional como por exemplo PostgreSQL ou MariaDB.
 
-### O presente desafio deve ser solucionado até 12/07/2019. 
+### O presente desafio deve ser solucionado até 01/10/2020. 
 
 ## Instruções:
 1. Faça um fork do projeto.
-1. Resolva o dasafio e submeta um PR até o dia 12/07/2019.
+1. Resolva o dasafio e submeta um PR até o dia 01/10/2020.
 1. Envie um e-mail para (oi at eduardofg dot dev) assim que o PR for submetido informando que o desafio foi finalizado.
 
 ### Objetivo
