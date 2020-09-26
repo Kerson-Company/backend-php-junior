@@ -55,7 +55,7 @@ class UsersController extends Controller
         $user->update($request->validated());
 
         return response()->json(
-            ['message' => 'Usuário editado com sucesso.']
+            ['message' => 'The user was successfully updated']
         );
     }
 
@@ -63,16 +63,16 @@ class UsersController extends Controller
      * @param User $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete(User $user)
+    public function destroy(User $user)
     {
         try {
             $user->delete();
             return response()->json(
-                ['message' => 'Usuário deletado com sucesso.']
+                ['message' => 'The user was successfully deleted']
             );
         } catch (\Exception $e) {
             return response()->json(
-                ['message' => 'Não foi possível deletar o usuário. Tente novamente mais tarde.']
+                ['message' => 'It was not possible to delete the user. Try again later.']
             );
         }
     }

@@ -18,24 +18,19 @@ use Illuminate\Support\Facades\Route;
     return $request->user();
 });*/
 
+/*
+ * Public Routes
+ * */
 Route::post('/ping','PingController@ping');
 
 Route::post('/auth','AuthController@auth');
 
-Route::post('/users','UsersController@store'); // ok
-Route::put('/users/{user}','UsersController@update'); // ok
-Route::delete('/user','UsersController@delete'); // to do
-Route::get('/users/{user}','UsersController@show'); //ok
+/*Route::post('/users','UsersController@store');
+Route::put('/users/{user}','UsersController@update');
+Route::delete('/users/{user}','UsersController@delete');
+Route::get('/users/{user}','UsersController@show');*/
 
-
-/*
- * /user	POST ok
-/user	PUT
-/user	DELETE
-/user/{:id}	GET ok
-*/
-
-//Route::resource('user', 'UsersController');
+Route::resource('/users', 'UsersController')->only(['store','update','destroy','show']);
 
 Route::group([
 

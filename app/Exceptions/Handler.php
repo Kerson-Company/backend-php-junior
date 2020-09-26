@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +55,60 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
+        return $this->handleException($request, $exception);
+    }
+
+    public function handleException($request, Throwable $exception)
+    {
+        if($request->expectsJson())
+        {
+
+            if($exception instanceof UnauthorizedHttpException) {
+
+                return response()->json('Oops. Try again sending in JSON format', 415);
+
+            }
+
+        }
+
+        // This will replace our 404 response with
+        // a JSON response.
+        if ($exception instanceof NotFoundHttpException)
+        {
+            return response()->json([
+                'data' => 'Oops. The Resource was not found'
+            ], 404);
+        }
+
+        // This will replace our 404 response with
+        // a JSON response.
+        if ($exception instanceof MethodNotAllowedHttpException)
+        {
+            return response()->json([
+                'error' => 'Oops. Method Not Allowed'
+            ], 405);
+        }
+
+        if ($exception instanceof ModelNotFoundException)
+        {
+            return response()->json([
+                'error' => 'Oops. The Resource was not found'
+            ], 404);
+        }
+
+        if ($exception instanceof MaintenanceModeException) {
+
+            return response()->json(
+                [   'mode' => 'Schedule Maintenance',
+                    'message' => $exception->getMessage(),
+                    'retry' => $exception->retryAfter,
+                ]
+                , 503);
+        }
+
         return parent::render($request, $exception);
     }
 }
