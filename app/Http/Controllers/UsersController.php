@@ -23,6 +23,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         return response()->json([
+            'status' => 'success',
             'user' => $user
         ]);
     }
@@ -38,7 +39,9 @@ class UsersController extends Controller
         $user->save();
 
         return response()->json(
-            ['message' => 'Usuário criado com sucesso.']
+            [
+                'status' => 'success',
+                'message' => 'The user was successfully created']
         );
     }
 
@@ -49,44 +52,28 @@ class UsersController extends Controller
      */
     public function update(User $user, UpdateUser $request)
     {
-
-        //dd(request()->all());
-        //dd($user);
         $user->update($request->validated());
 
         return response()->json(
-            ['message' => 'The user was successfully updated']
+            [
+                'status' => 'success',
+                'message' => 'The user was successfully updated']
         );
     }
 
     /**
      * @param User $user
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
-        try {
             $user->delete();
             return response()->json(
-                ['message' => 'The user was successfully deleted']
+                [
+                    'status' => 'success',
+                    'message' => 'The user was successfully deleted'
+                ]
             );
-        } catch (\Exception $e) {
-            return response()->json(
-                ['message' => 'It was not possible to delete the user. Try again later.']
-            );
-        }
-    }
-
-    /**
-     * @return array
-     */
-    private function validateUser(User $user)
-    {
-        return request()->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email|unique:users',
-            'cpf' => 'required|unique:users|min:11|max:11',
-            'password' => 'required',
-        ]);
     }
 }

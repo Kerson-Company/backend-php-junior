@@ -22,11 +22,6 @@ Route::post('/ping','PingController@ping');
 
 Route::post('/auth','AuthController@auth');
 
-/*Route::post('/users','UsersController@store');
-Route::put('/users/{user}','UsersController@update');
-Route::delete('/users/{user}','UsersController@delete');
-Route::get('/users/{user}','UsersController@show');*/
-
 /*
  * Auth Routes
  *

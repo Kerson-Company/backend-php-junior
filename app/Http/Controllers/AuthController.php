@@ -29,7 +29,7 @@ class AuthController extends Controller
             return response()->json(
                 [
                     'status' => 'error',
-                    'message' => 'Usuário não pode ser autenticado'
+                    'message' => 'The data that you have entered is incorrect'
                 ],
                 401
             );
@@ -47,7 +47,10 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Successfully logged out'
+        ]);
     }
 
     /**
@@ -64,12 +67,12 @@ class AuthController extends Controller
             'tokenjwt' => $token,
             'expires' => auth()->factory()->getTTL() * 60,
             'token_type' => 'bearer',
-            "tokenmsg" => "use o token para acessar os endpoints!",
+            "tokenmsg" => "Use the token to access endpoints!",
             "User" =>
                 [
                     "id" => auth()->user()->id,
-                    "nome" => auth()->user()->name,
-                    "cpf" => auth()->user()->name,
+                    "name" => auth()->user()->name,
+                    "cpf" => auth()->user()->cpf,
                     "email" => auth()->user()->email,
                     "createdAt" => auth()->user()->created_at,
                     "updatedAt" => auth()->user()->updated_at

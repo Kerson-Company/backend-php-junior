@@ -102,7 +102,8 @@ class Handler extends ExceptionHandler
         if ($exception instanceof MaintenanceModeException) {
 
             return response()->json(
-                [   'mode' => 'Schedule Maintenance',
+                [
+                    'mode' => 'Schedule Maintenance',
                     'message' => $exception->getMessage(),
                     'retry' => $exception->retryAfter,
                 ]
