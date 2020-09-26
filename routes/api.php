@@ -22,17 +22,17 @@ Route::post('/ping','PingController@ping');
 
 Route::post('/auth','AuthController@auth');
 
-Route::post('/user','UsersController@store');
-Route::put('/user','UsersController@update');
-Route::delete('/user','UsersController@delete');
-Route::get('/user/{:id}','UsersController@show');
+Route::post('/users','UsersController@store'); // ok
+Route::put('/users/{user}','UsersController@update'); // ok
+Route::delete('/user','UsersController@delete'); // to do
+Route::get('/users/{user}','UsersController@show'); //ok
 
 
 /*
- * /user	POST
+ * /user	POST ok
 /user	PUT
 /user	DELETE
-/user/{:id}	GET
+/user/{:id}	GET ok
 */
 
 //Route::resource('user', 'UsersController');
