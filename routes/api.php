@@ -14,12 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-
 /*
  * Public Routes
+ *
  * */
 Route::post('/ping','PingController@ping');
 
@@ -30,22 +27,16 @@ Route::put('/users/{user}','UsersController@update');
 Route::delete('/users/{user}','UsersController@delete');
 Route::get('/users/{user}','UsersController@show');*/
 
-Route::resource('/users', 'UsersController')->only(['store','update','destroy','show']);
+/*
+ * Auth Routes
+ *
+ * */
 
-Route::group([
+Route::middleware(['auth:api'])->group(function () {
 
-    'middleware' => 'api',
-    'prefix' => 'auth'
+    Route::resource('/users', 'UsersController')->only(['store','update','destroy','show']);
 
-], function ($router) {
-
-    /*Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');*/
-
-
-
+    Route::post('/logout','AuthController@logout');
 });
 
 
