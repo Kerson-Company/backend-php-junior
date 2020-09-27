@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\User;
+use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
@@ -53,30 +54,19 @@ class AuthController extends Controller
         ]);
     }
 
+
     /**
-     * Get the token array structure.
-     *
-     * @param string $token
-     *
+     * @param String $token
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithToken(String $token)
     {
-        return response()->json([
+        return response()->json(array_merge([
             'status' => 'success',
             'tokenjwt' => $token,
             'expires' => auth()->factory()->getTTL() * 60,
             'token_type' => 'bearer',
             "tokenmsg" => "Use the token to access endpoints!",
-            "User" =>
-                [
-                    "id" => auth()->user()->id,
-                    "name" => auth()->user()->name,
-                    "cpf" => auth()->user()->cpf,
-                    "email" => auth()->user()->email,
-                    "createdAt" => auth()->user()->created_at,
-                    "updatedAt" => auth()->user()->updated_at
-               ]
-        ]);
+        ], (new UserResource(auth()->user()))->resolve()));
     }
 }
