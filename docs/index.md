@@ -16,8 +16,6 @@
 ### How to install 
 ##### Method 1 (Automated) 
 
-```chmod +x install.sh```
-
 ```./install.sh```
 
 ##### Method 2 (step by step)
