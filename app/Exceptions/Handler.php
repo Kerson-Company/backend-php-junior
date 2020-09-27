@@ -2,12 +2,15 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -47,9 +50,9 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  \Throwable  $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws \Throwable
      */
@@ -63,39 +66,27 @@ class Handler extends ExceptionHandler
 
     public function handleException($request, Throwable $exception)
     {
-        if($request->expectsJson())
-        {
-
-            if($exception instanceof UnauthorizedHttpException) {
-
-                return response()->json('Oops. Try again sending in JSON format', 415);
-
-            }
-
-        }
-
-        // This will replace our 404 response with
-        // a JSON response.
         if ($exception instanceof NotFoundHttpException)
         {
             return response()->json([
-                'data' => 'Oops. The Resource was not found'
+                'status' => 'error',
+                'message' => 'Oops. The Resource was not found'
             ], 404);
         }
 
-        // This will replace our 404 response with
-        // a JSON response.
         if ($exception instanceof MethodNotAllowedHttpException)
         {
             return response()->json([
-                'error' => 'Oops. Method Not Allowed'
+                'status' => 'error',
+                'message' => 'Oops. Method Not Allowed'
             ], 405);
         }
 
         if ($exception instanceof ModelNotFoundException)
         {
             return response()->json([
-                'error' => 'Oops. The Resource was not found'
+                'status' => 'error',
+                'message' => 'Oops. The Resource was not found'
             ], 404);
         }
 
@@ -111,5 +102,18 @@ class Handler extends ExceptionHandler
         }
 
         return parent::render($request, $exception);
+    }
+
+    /**
+     * @param Request $request
+     * @param AuthenticationException $exception
+     * @return JsonResponse|Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Unauthenticated'
+        ], 401);
     }
 }
