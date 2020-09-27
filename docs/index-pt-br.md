@@ -1,4 +1,4 @@
-#### Kerson Company - Desafio Programador PHP Backend Júnior(Laravel) 
+## Kerson Company - Desafio Programador PHP Backend Júnior(Laravel) 
 
 - Esta aplicação é uma API backend em Laravel que implementa um CRUD com os seguintes **endpoints**:
 
@@ -13,11 +13,11 @@
 | /users                |  GET   |
 | /logout               |  POST  |
 
-#### Como instalar (Automatizado)
+### Como instalar (Automatizado)
 
 ```./install.sh```
 
-#### Como instalar (passo a passo)
+### Como instalar (passo a passo)
   
 - Acesse o terminal
 - Faça o download do repositório:
@@ -63,6 +63,6 @@ DB_PASSWORD=secret
 Feito isso, a api está disponível para o uso. 
 Por padrão, a url é ***http://127.0.0.1:8000/api***
 
-#### Testes com o Insomnia / Postman
+### Testes com o Insomnia / Postman
 
 - Para realizar os testes, importe o arquivo ./tests/Insomnia_back-php-junior.json
