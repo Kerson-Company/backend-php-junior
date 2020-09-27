@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUser;
 use App\Http\Requests\UpdateUser;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
@@ -22,14 +23,13 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json([
-            'status' => 'success',
-            'user' => $user
-        ]);
+        return response()->json(array_merge(['status' => 'success'],
+            (new UserResource($user))->resolve()));
     }
 
+
     /**
-     * @param UserStoreRequest $request
+     * @param StoreUser $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreUser $request)
@@ -38,28 +38,26 @@ class UsersController extends Controller
         $user->password = Hash::make(Arr::get($request->validated(),'password'));
         $user->save();
 
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'The user was successfully created']
-        );
+        return response()->json(array_merge(
+            ['status' => 'success', 'message' => 'The user was successfully created'],
+            (new UserResource($user))->resolve()));
     }
 
+
     /**
-     * @param UserUpdateRequest $request
      * @param User $user
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param UpdateUser $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(User $user, UpdateUser $request)
     {
         $user->update($request->validated());
 
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => 'The user was successfully updated']
-        );
+        return response()->json(array_merge(
+            ['status' => 'success', 'message' => 'The user was successfully updated'],
+            (new UserResource($user))->resolve()));
     }
+
 
     /**
      * @param User $user
@@ -69,11 +67,10 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
             $user->delete();
-            return response()->json(
-                [
-                    'status' => 'success',
-                    'message' => 'The user was successfully deleted'
-                ]
-            );
+
+            // TODO Soft delete
+            return response()->json(array_merge(
+                ['status' => 'success', 'message' => 'The user was successfully deleted'],
+                (new UserResource($user))->resolve()));
     }
 }
