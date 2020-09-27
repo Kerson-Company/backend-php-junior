@@ -29,7 +29,7 @@ Route::post('/auth','AuthController@auth');
 
 Route::middleware(['auth:api'])->group(function () {
 
-    Route::resource('/users', 'UsersController')->only(['store','update','destroy','show']);
+    Route::apiResource('/users', 'UsersController'); //->only(['store','update','destroy','show']);
 
     Route::post('/logout','AuthController@logout');
 });

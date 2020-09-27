@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Hash;
  */
 class UsersController extends Controller
 {
+    public function index()
+    {
+        return UserResource::collection(User::all());
+    }
     /**
      * @param User $user
      * @return \Illuminate\Http\JsonResponse
