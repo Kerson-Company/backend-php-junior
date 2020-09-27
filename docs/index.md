@@ -1,6 +1,6 @@
-#### Kerson Company - Desafio Programador PHP Backend Júnior(Laravel) 
+#### Kerson Company - PHP Backend Junior Programmer Challenge (Laravel)
 
-- Esta aplicação é uma API backend em Laravel que implementa um CRUD com os seguintes **endpoints**:
+- This application is a Laravel backend API that implements a CRUD with the following *endpoints*:
 
 | Endpoint              | Method |
 |-----------------------|:------:|
@@ -11,53 +11,61 @@
 | /users/{id}           | DELETE |
 | /users/{id}           |  GET   |
 | /users                |  GET   |
+| /logout               |  POST  |
 
-#### Como instalar (passo a passo)
-  
-- Acesse o terminal
-- Faça o download do repositório:
+### How to install 
+##### Method 1 (Automated) 
+
+```chmod +x install.sh```
+
+```./install.sh```
+
+##### Method 2 (step by step)
+   
+- Access the terminal
+- Download the repository:
   
 ```git clone https://github.com/tfilho/backend-php-junior```
-- Instale as dependências:
+- Install the dependencies:
 
 ```composer install```
-- Copie o arquivo de configurações modelo: 
+- Copy the model settings file:
   
-```cp .env.example .env``` 
+```cp .env.example .env```
 
-- Acesse o arquivo .env e altere as seguintes variáveis(Coloque suas configurações):
+- Access the .env file and change the following variables (Put your settings):
 
 ```
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=laravel
-DB_USERNAME=root
-DB_PASSWORD=secret
+DB_HOST = 127.0.0.1
+DB_PORT = 3306
+DB_DATABASE = laravel
+DB_USERNAME = root
+DB_PASSWORD = secret
 ```
 
-- Crie a chave da aplicação:
+- Create the application key:
 
 ```php artisan key:generate```
 
-- Crie a chave JWT:
+- Create the JWT key:
 
 ```php artisan jwt:secret```
 
-- Crie a estrutura do banco de dados
+- Create the database structure
  
 ```php artisan migrate```
 
-- Adicione alguns usuários aleatórios:
+- Add some random users:
 
 ```php artisan db:seed```
 
-- Execute o servidor de desenvolvimento embutido:
+- Run the embedded development server:
 
-```php artisan serve```
+``` php artisan serve```
 
-Feito isso, a api está disponível para o uso. 
-Por padrão, a url é ***http://127.0.0.1:8000/api***
+That done, the api is available for use.
+By default, the url is *** http: //127.0.0.1: 8000 / api ***
 
-#### Testes com o Insomnia / Postman
+#### Testing with Insomnia / Postman
 
-- Para realizar os testes, importe o arquivo ./tests/Insomnia_back-php-junior.json
+- To perform the tests, import the ./tests/Insomnia_back-php-junior.json file
