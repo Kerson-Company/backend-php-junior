@@ -1,61 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# backend-php-junior
+Teste programador Backend PHP Júnior/Estágio (Laravel)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## Desafio Programador PHP Backend Júnior(Laravel)
+As tarefas de CRUD são rotinas muito comuns no dia a dia de desenvolvedores web, o objetivo principal do desafio é fazer um CRUD de Usuários. Somente a rota API é importante, não se preocupe com o frontend. 
+Todos testes de funcionamento do sistema serão realizados através do Postman.
+Testes uniários com PHPUnit são um plus.
+Espera-se que o candidato tenha bons conhecimentos em PHP e saiba o mínimo do framework Laravel. 
+Para persistencia dos dados deve ser utilizado algum banco de dados relacional como por exemplo PostgreSQL ou MariaDB.
 
-## About Laravel
+### O presente desafio deve ser solucionado até 01/10/2020. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instruções:
+1. Faça um fork do projeto.
+1. Resolva o dasafio e submeta um PR até o dia 01/10/2020.
+1. Envie um e-mail para (oi at eduardofg dot dev) assim que o PR for submetido informando que o desafio foi finalizado.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Objetivo
+Construir uma API backend em Laravel que implementem um CRUD e os seguintes endpoints:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+| Endpoint              | Method |
+|-----------------------|:------:|
+| /ping                 |  POST  |
+| /auth                 |  POST  |
+| /user                 |  POST  |
+| /user                 |  PUT   |
+| /user                 | DELETE |
+| /user/{:id}           |  GET   |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Endpoints
 
-## Laravel Sponsors
+## Ping
+O Ping é público, usado para saber se o server está online.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Auth
 
-### Premium Partners
+Este endpoint irá possuir um header com Authorization e irá enviar via JSON login e senha em um método [POST].
+Ele irá retornar um JSON quando der erro e um JSON quando for sucesso.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+**HTTP/2 200**
+```json
+{  
+   "status":"success",
+   "message":"Usuário criado e JWT encontrado",
+  "tokenjwt":"eyJhbGciOi-RkOM8Hjc5DYNJuqyEy3gvy_IMjcu2w-hl2yHilvPNP_UK0ocUxaKdsD5oS5fV-TYlfH_k",
+   "expires":"2019-07-05",
+   "tokenmsg":"use o token para acessar os endpoints!",
+   "User":{ 
+      "id":345,
+      "nome":"Programador Backend PHP Júnior",
+      "cpf":"12345678909",
+      "email":"junior@php.net",
+      "createdAt":"2019-07-03 07:09:08",
+      "updatedAt":"2019-07-03 07:09:08"
+   }
+}
+```
 
-## Contributing
+**HTTP/2 500**
+```json
+{  
+   "status":"error",
+   "message":"Usuário não pode ser autenticado!"
+}
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## User
 
-## Code of Conduct
+Este endpoint deverá ser responsável por todo CRUD, ele deverá trazer informações do Usuário como:
+``
+  id
+  nome 
+  cpf
+  email
+  created_at 
+  updated_at 
+``
+no formato JSON.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Pontos a serem avaliados
+ - Organização do código e simplicidade na lógica de programação
+ - Utilização de boas práticas (PSRs)
+ - Deixar sempre a regra de negócio o mais desacoplada possível.
+ - Criar as migrations e seeds para validação (obrigatório)
+ - JWT (não obrigatório porém será considerado diferencial)
+ - Criar os mocks de teste (não obrigatório porém será considerado diferencial)
+ 
+ 
+## Referências
+1. [PHP](https://www.php.net/)
+1. [Laravel](https://laravel.com)
+1. [Postman](https://www.getpostman.com/)
+1. [JWT](https://jwt.io/)
+1. [Entendendo JWT](https://medium.com/tableless/entendendo-tokens-jwt-json-web-token-413c6d1397f6)
+1. [PostgreSQL](https://www.postgresql.org/)
+1. [MariaDB](https://mariadb.com/kb/pt-br/sobre-o-mariadb/)
+1. [PHP Unit](https://phpunit.de/)
