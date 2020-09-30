@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\User;
+// use App\User;
+use App\Models\User;
 
-class UsersTableSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +15,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+            User::create([
             'name' => 'Osvaldo Souza',
             'email' => 'osvaldo@email.com',
             'cpf'   =>  '51442061235',
-            'password' => bbcrypt('12345678'),
+            'password' => bcrypt('12345678'),
 
         ]);
     }
