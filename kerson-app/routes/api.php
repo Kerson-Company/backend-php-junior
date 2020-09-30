@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
+use App\Http\Controllers\Api\UserController;
+use App\Models\User;
+
+// use App\Http\Controllers\Api;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +32,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('ping', [SistemaController::class, 'ping']);
 
 
+
+
+Route::namespace('Api')->group(function() {
+
+
+        Route::post('/usuarios/add', 'UserController@add');
+
+
+});
