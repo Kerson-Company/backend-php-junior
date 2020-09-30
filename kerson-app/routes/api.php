@@ -39,5 +39,9 @@ Route::namespace('Api')->group(function() {
 
         Route::post('/usuarios/add', 'UserController@add');
 
+        Route::get('/usuarios', 'UserController@list');
 
 });
+
+
+

@@ -20,7 +20,7 @@ class UserController extends Controller
         }
 
 
-        public function add(Request $request){
+        public function add(Request $request) {
 
 
                 try {
@@ -33,9 +33,9 @@ class UserController extends Controller
 
                     $user->save();
 
-                    return ['retorna'=>'Cadastro realizado'];
+                    return ['retorna'=>'Ok'];
 
-                }catch(\Exception $error) {
+                } catch(\Exception $error) {
 
 
                         return ['retorno'=>'error', 'details'=>$error];
@@ -45,7 +45,16 @@ class UserController extends Controller
 
             }
 
-        public function show(Product $product){
+            public function list(){
+
+                $user = User::all();
+
+                return $user;
+
+            }
+
+
+        public function show(){
         //
         }
 
