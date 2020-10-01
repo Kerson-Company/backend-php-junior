@@ -40,6 +40,8 @@ Route::namespace('Api')->group(function() {
         Route::post('/usuarios/add', 'UserController@add');
 
         Route::get('/usuarios', 'UserController@list');
+        Route::get('/usuarios/{id}', 'UserController@selectUser');
+        Route::put('/usuarios/{id}', 'UserController@update');
 
 });
 

@@ -47,11 +47,46 @@ class UserController extends Controller
 
             public function list(){
 
-                $user = User::all();
+                $user = User::all('name', 'email', 'cpf', 'created_at', 'updated_at');
 
                 return $user;
 
             }
+
+            public function selectUser($id){
+
+                $user = User::find($id);
+
+
+                return $user;
+
+            }
+
+
+            public function update(Request $request, $id){
+
+                try {
+
+                        $user = User::find($id);
+
+                        $user->name = $request->name;
+                        $user->email = $request->email;
+                        $user->cpf = $request->cpf;
+
+                        $user->save();
+
+                        return ['retorna' => "Ok"];
+
+
+                } catch(\Exception $error) {
+
+                    return ['retorno'=>'error', 'details'=>$error];
+
+                }
+
+
+
+                }
 
 
         public function show(){
@@ -69,9 +104,7 @@ class UserController extends Controller
         }
 
 
-        public function update(Product $product, Request $request){
-        //
-        }
+
 
 
         public function destroy(Product $product){
