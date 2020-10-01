@@ -33,7 +33,7 @@ class UserController extends Controller
 
                     $user->save();
 
-                    return ['retorna'=>'Ok'];
+                    return ['retorna'=>'Usuário Cadastrado'];
 
                 } catch(\Exception $error) {
 
@@ -75,7 +75,7 @@ class UserController extends Controller
 
                         $user->save();
 
-                        return ['retorna' => "Ok"];
+                        return ['retorna' => "Dados atualizados"];
 
 
                 } catch(\Exception $error) {
@@ -89,26 +89,26 @@ class UserController extends Controller
                 }
 
 
-        public function show(){
-        //
-        }
+        public function delete($id){
 
 
-        public function store(){
-        //
-        }
+                try  {
 
 
-        public function edit(Product $product){
-        //
-        }
+                    $user = User::find($id);
 
 
+                    $user->delete();
+
+                    return ['retorna' => 'Usuário deletado'];
+
+                } catch(\Exception $error) {
 
 
+                    return ['retorno'=>'error', 'details'=>$error];
 
-        public function destroy(Product $product){
-        //
+                }
+
         }
 
 

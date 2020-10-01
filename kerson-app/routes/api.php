@@ -42,6 +42,7 @@ Route::namespace('Api')->group(function() {
         Route::get('/usuarios', 'UserController@list');
         Route::get('/usuarios/{id}', 'UserController@selectUser');
         Route::put('/usuarios/{id}', 'UserController@update');
+        Route::delete('/usuarios/{id}', 'UserController@delete');
 
 });
 
