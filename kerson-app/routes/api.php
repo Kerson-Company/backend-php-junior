@@ -36,6 +36,7 @@ Route::get('ping', [SistemaController::class, 'ping']);
 
 Route::namespace('Api')->group(function() {
 
+        Route::post('/auth/login', 'AuthController@login');
 
         Route::post('/usuarios/add', 'UserController@add');
 
