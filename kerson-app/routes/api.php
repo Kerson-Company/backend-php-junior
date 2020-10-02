@@ -30,7 +30,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route:group:([namespace])
 
 
-Route::get('ping', [SistemaController::class, 'ping']);
+Route::post('ping', [SistemaController::class, 'ping']);
 
 
 
