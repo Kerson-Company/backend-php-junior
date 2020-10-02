@@ -39,10 +39,6 @@ class AuthController extends Controller
     }
 
 
-
-
-
-
         /**
      * Get the token array structure.
      *
@@ -87,6 +83,16 @@ class AuthController extends Controller
 
 
 
+   /**
+     * Log the user out (Invalidate the token).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth('api')->logout();
 
+        return response()->json(['message' => 'Successfully logged out']);
+    }
 
 }
