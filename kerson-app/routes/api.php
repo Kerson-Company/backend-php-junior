@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SistemaController;
 use App\Http\Controllers\Api\UserController;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 // use App\Http\Controllers\Api;
 /*
@@ -37,6 +38,8 @@ Route::get('ping', [SistemaController::class, 'ping']);
 Route::namespace('Api')->group(function() {
 
         Route::post('/auth/login', 'AuthController@login');
+
+        Route::post('/me', 'AuthController@me');
 
         Route::post('/usuarios/add', 'UserController@add');
 
