@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -16,8 +17,9 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        // $this->middleware('auth:api', ['except' => ['login']]);
     }
+
 
 
     /**
@@ -31,6 +33,7 @@ class AuthController extends Controller
 
         $credentials = $request->only(['email', 'password']);
 
+
         if (! $token = auth('api')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -38,14 +41,6 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-
-        /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     protected function respondWithToken($token)
     {
         return response()->json([
@@ -55,44 +50,60 @@ class AuthController extends Controller
         ]);
     }
 
-
-
-       /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\Guard
-     */
     public function guard()
     {
         return Auth::guard();
     }
 
-
-
-
-
-  /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function me()
     {
         return response()->json(auth('api')->user());
     }
 
-
-
-   /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function logout()
     {
         auth('api')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+
+    public function auth(Request $request){
+
+        $user = new User();
+
+
+
+        $credentials = request(['email', 'password']);
+        if(! $token = auth('api')->attempt($credentials)) {
+
+                return response()->json(['error'=>true, 'status'=>'error'],
+                                        ['message' => 'Usuário não pode ser autenticado'], 500);
+        }
+
+
+        if(!$user){
+            return response()->json("usuario nao encontrado");
+        }
+
+
+        // $user = User::find($credentials);
+        $user = User::where($credentials)->first();
+        $user = auth()->user();
+
+        return response()->json([
+
+            'status' => "success",
+            'message' =>"Usuário criado e JWT encontrado",
+            'tokenjwt' => $token,
+            'expires' => auth('api')->factory()->getTTL() * 60,
+
+            'User' => $user
+
+
+        ]);
+
+
     }
 
 }

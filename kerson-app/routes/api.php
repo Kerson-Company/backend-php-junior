@@ -43,20 +43,26 @@ Route::namespace('Api')->group(function() {
         Route::post('/auth/login', 'AuthController@login');
 
 
+        Route::post('/usuarios/add', 'UserController@add');
+
+        Route::get('/usuarios', 'UserController@list');
+        Route::get('/usuarios/{id}', 'UserController@selectUser');
+        Route::put('/usuarios/{id}', 'UserController@update');
+        Route::delete('/usuarios/{id}', 'UserController@delete');
+
+
+
+
+            Route::post('/auth', 'AuthController@auth');
+
+
             Route::group(['middleware' => ['protectedJWT']], function() {
 
             Route::post('auth/logout', 'AuthController@logout');
 
-
-
             Route::post('/me', 'AuthController@me');
 
-            Route::post('/usuarios/add', 'UserController@add');
 
-            Route::get('/usuarios', 'UserController@list');
-            Route::get('/usuarios/{id}', 'UserController@selectUser');
-            Route::put('/usuarios/{id}', 'UserController@update');
-            Route::delete('/usuarios/{id}', 'UserController@delete');
 
         });
 

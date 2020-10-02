@@ -43,6 +43,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
+            /* aqui geralmente fca o Auth::api configurado. VC provavelmente deve ter alterado  para o middleware chamar somente api*/
+
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
