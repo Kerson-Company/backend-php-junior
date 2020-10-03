@@ -23,15 +23,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-    // Route::get('ping', 'SistemaController@ping');
 
-
-
-// Route:group:([namespace])
 
 
 Route::post('ping', [SistemaController::class, 'ping']);
-
 
 
 
