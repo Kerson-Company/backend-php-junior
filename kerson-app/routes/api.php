@@ -43,16 +43,6 @@ Route::namespace('Api')->group(function() {
         Route::post('/auth/login', 'AuthController@login');
 
 
-        Route::post('/usuarios/add', 'UserController@add');
-
-        Route::get('/usuarios', 'UserController@list');
-        Route::get('/usuarios/{id}', 'UserController@selectUser');
-        Route::put('/usuarios/{id}', 'UserController@update');
-        Route::delete('/usuarios/{id}', 'UserController@delete');
-
-
-
-
             Route::post('/auth', 'AuthController@auth');
 
 
@@ -62,8 +52,15 @@ Route::namespace('Api')->group(function() {
 
             Route::post('/me', 'AuthController@me');
 
+            Route::post('/usuarios/add', 'UserController@add');
 
+            Route::get('/usuarios', 'UserController@list');
 
+            Route::get('/usuarios/{id}', 'UserController@selectUser');
+
+            Route::put('/usuarios/edit/{id}', 'UserController@update');
+
+            Route::delete('/usuarios/delete/{id}', 'UserController@delete');
         });
 
 
