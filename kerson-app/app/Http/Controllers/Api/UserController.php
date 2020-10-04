@@ -49,7 +49,13 @@ class UserController extends Controller
 
                 $user = User::all('name', 'email', 'cpf', 'created_at', 'updated_at');
 
-                return $user;
+                return response()->json([
+
+
+                    'User' => $user
+
+                ]);
+
 
             }
 
