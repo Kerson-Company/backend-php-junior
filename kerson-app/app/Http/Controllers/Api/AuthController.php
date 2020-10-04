@@ -87,7 +87,7 @@ class AuthController extends Controller
         }
 
 
-        // $user = User::find($credentials);
+       
         $user = User::where($credentials)->first();
         $user = auth()->user();
 
